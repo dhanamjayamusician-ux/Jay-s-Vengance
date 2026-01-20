@@ -1,10 +1,15 @@
-\<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>JAY | For Vengeance</title>
     
+    <meta property="og:title" content="JAY | For Vengeance">
+    <meta property="og:description" content="The secure channel is open. Join the hunt.">
+    <meta property="og:image" content="https://images.unsplash.com/photo-1502139214982-d0ad755818d8?q=80&w=1000">
+    <meta name="twitter:card" content="summary_large_image">
+
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&family=Playfair+Display:ital,wght@1,700&display=swap" rel="stylesheet">
 
     <style>
@@ -59,19 +64,16 @@
         .content-text h2 { font-size: 2.5rem; margin-bottom: 20px; color: var(--accent-gold); text-transform: uppercase; }
         .content-image { flex: 1; border-left: 4px solid var(--primary-red); padding-left: 30px; }
 
-        /* --- THE REVEAL ANIMATION --- */
         .reveal { 
             opacity: 0; 
             transform: translateY(40px); 
             transition: opacity 1.2s cubic-bezier(0.4, 0, 0.2, 1), transform 1.2s cubic-bezier(0.4, 0, 0.2, 1); 
-            will-change: opacity, transform;
         }
         .reveal.active { opacity: 1; transform: translateY(0); }
 
         .cta-btn { background-color: var(--primary-red); color: white; padding: 16px 40px; text-decoration: none; font-weight: 700; text-transform: uppercase; display: inline-block; border: none; cursor: pointer; transition: 0.3s; }
         .cta-btn:hover { background-color: #c92a35; transform: scale(1.05); }
 
-        /* --- MAILCHIMP INTEGRATED SECTION --- */
         .mailbox-section { padding: 100px 10%; text-align: center; background: rgba(0,0,0,0.4); }
         .mailbox-container { max-width: 600px; margin: 0 auto; }
         .mail-form { display: flex; flex-direction: column; gap: 15px; margin-top: 30px; }
@@ -83,7 +85,7 @@
         @media (max-width: 768px) {
             .content-section { flex-direction: column; text-align: center; }
             .content-image { border-left: none; border-top: 4px solid var(--primary-red); padding-left: 0; padding-top: 20px; }
-            .nav-links { display: none; } /* Simplified for mobile */
+            .nav-links { display: none; }
         }
     </style>
 </head>
@@ -138,8 +140,7 @@
                 id="mc-embedded-subscribe-form" 
                 name="mc-embedded-subscribe-form" 
                 class="mail-form" 
-                target="_blank" 
-                novalidate>
+                target="_blank">
                 
                 <input 
                     type="email" 
@@ -148,7 +149,7 @@
                     id="mce-EMAIL" 
                     placeholder="Enter Secure Email..." 
                     required 
-                    value="">
+                    maxlength="100">
                 
                 <div style="position: absolute; left: -5000px;" aria-hidden="true">
                     <input type="text" name="b_9f3b8d4c5ae418fb6268e3e6a_5eed88bcdc" tabindex="-1" value="">
@@ -156,6 +157,7 @@
 
                 <button type="submit" name="subscribe" id="mc-embedded-subscribe" class="cta-btn">Join the Hunt</button>
             </form>
+            <p id="form-feedback" style="margin-top: 15px; font-size: 0.8rem; display: none;"></p>
         </div>
     </section>
 
@@ -164,10 +166,38 @@
     </footer>
 
     <script>
+        // SECURE FORM LOGIC
+        const form = document.getElementById('mc-embedded-subscribe-form');
+        const feedback = document.getElementById('form-feedback');
+        let lastSubmitTime = 0;
+
+        form.addEventListener('submit', function(e) {
+            const now = Date.now();
+            const emailInput = document.getElementById('mce-EMAIL').value;
+
+            // Rate limiting
+            if (now - lastSubmitTime < 5000) { 
+                e.preventDefault();
+                feedback.style.display = 'block';
+                feedback.style.color = 'var(--primary-red)';
+                feedback.textContent = "Slow down. The channel is busy.";
+                return;
+            }
+
+            // Sanitization
+            if (emailInput.includes('<') || emailInput.includes('>')) {
+                e.preventDefault();
+                alert("Invalid characters detected.");
+                return;
+            }
+
+            lastSubmitTime = now;
+        });
+
+        // REVEAL ANIMATION
         function reveal() {
             var reveals = document.querySelectorAll('.reveal');
             var windowHeight = window.innerHeight;
-            
             reveals.forEach(el => {
                 var elementTop = el.getBoundingClientRect().top;
                 if (elementTop < windowHeight * 0.85) {
