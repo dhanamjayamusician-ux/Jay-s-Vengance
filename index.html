@@ -1,34 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JAY | For Vengeance</title>
+    
+    <meta property="og:title" content="JAY | For Vengeance">
+    <meta property="og:description" content="The secure channel is open. Join the hunt.">
+    <meta property="og:image" content="https://images.unsplash.com/photo-1502139214982-d0ad755818d8?q=80&w=1000">
+    <meta name="twitter:card" content="summary_large_image">
 
-                <span style="color: var(--primary-red); font-weight: bold; font-style: normal;">— JAY</span>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&family=Playfair+Display:ital,wght@1,700&display=swap" rel="stylesheet">
 
-            </p>
+    <style>
+        :root {
+            --primary-red: #e63946;
+            --deep-black: #0a0a0a;
+            --text-white: #f1f1f1;
+            --accent-gold: #d4af37;
+        }
 
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body { 
+            font-family: 'Montserrat', sans-serif; 
+            color: var(--text-white); 
+            line-height: 1.6; 
+            overflow-x: hidden;
+            background: linear-gradient(rgba(0,0,0,0.65), rgba(0,0,0,0.65)), 
+                        url('https://images.unsplash.com/photo-1502139214982-d0ad755818d8?auto=format&fit=crop&w=1920&q=80');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed; 
+            background-color: var(--deep-black);
+        }
+
+        nav { 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center; 
+            padding: 20px 10%; 
+            background: rgba(10, 10, 10, 0.85); 
+            position: fixed; 
+            width: 100%; 
+            z-index: 1000; 
+            border-bottom: 1px solid rgba(255,255,255,0.1); 
+            backdrop-filter: blur(10px);
+        }
+        
+        .logo { font-size: 1.5rem; font-weight: 900; color: var(--primary-red); letter-spacing: 2px; }
+
+        .nav-links { list-style: none; display: flex; }
+        .nav-links li { margin-left: 20px; }
+        .nav-links a { text-decoration: none; color: var(--text-white); font-weight: 700; font-size: 0.8rem; text-transform: uppercase; transition: 0.3s; }
+        .nav-links a:hover { color: var(--primary-red); }
+
+        .hero { height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; }
+        .hero h1 { font-size: clamp(4rem, 15vw, 8rem); font-weight: 900; letter-spacing: -5px; margin-bottom: 0; }
+        .hero p { font-family: 'Playfair Display', serif; font-size: clamp(1.2rem, 5vw, 2.2rem); color: var(--primary-red); font-style: italic; margin-bottom: 30px; }
+
+        .content-section { padding: 100px 10%; display: flex; align-items: center; gap: 50px; min-height: 60vh; }
+        .content-text { flex: 1; text-shadow: 2px 2px 10px rgba(0,0,0,0.7); }
+        .content-text h2 { font-size: 2.5rem; margin-bottom: 20px; color: var(--accent-gold); text-transform: uppercase; }
+        .content-image { flex: 1; border-left: 4px solid var(--primary-red); padding-left: 30px; }
+
+        /* REVEAL ANIMATION */
+        .reveal { 
+            opacity: 0; 
+            transform: translateY(40px); 
+            transition: opacity 1.2s cubic-bezier(0.4, 0, 0.2, 1), transform 1.2s cubic-bezier(0.4, 0, 0.2, 1); 
+        }
+        .reveal.active { opacity: 1; transform: translateY(0); }
+
+        .cta-btn { background-color: var(--primary-red); color: white; padding: 16px 40px; text-decoration: none; font-weight: 700; text-transform: uppercase; display: inline-block; border: none; cursor: pointer; transition: 0.3s; }
+        .cta-btn:hover { background-color: #c92a35; transform: scale(1.05); }
+
+        /* MAILCHIMP STYLING */
+        .mailbox-section { padding: 100px 10%; text-align: center; background: rgba(0,0,0,0.4); }
+        .mailbox-container { max-width: 600px; margin: 0 auto; }
+        .mail-form { display: flex; flex-direction: column; gap: 15px; margin-top: 30px; }
+        .mail-input { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.2); padding: 15px; color: white; outline: none; font-family: 'Montserrat', sans-serif; font-size: 1rem; width: 100%; }
+        .mail-input:focus { border-color: var(--primary-red); }
+
+        footer { padding: 40px; text-align: center; background: rgba(0,0,0,0.9); font-size: 0.7rem; color: #666; letter-spacing: 1px; }
+
+        @media (max-width: 768px) {
+            .content-section { flex-direction: column; text-align: center; }
+            .content-image { border-left: none; border-top: 4px solid var(--primary-red); padding-left: 0; padding-top: 20px; }
+            .nav-links { display: none; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <div class="logo">JAY</div>
+        <ul class="nav-links">
+            <li><a href="#story">Mission</a></li>
+            <li><a href="#characters">Ananya</a></li>
+            <li><a href="#updates">Secure</a></li>
+        </ul>
+    </nav>
+
+    <header class="hero">
+        <h1 class="reveal">JAY</h1>
+        <p class="reveal">"Not for law, For vengeance"</p>
+        <a href="#story" class="cta-btn reveal">Read Dossier</a>
+    </header>
+
+    <section id="story" class="content-section">
+        <div class="content-text reveal">
+            <h2>The Badge is a Burden</h2>
+            <p>Jay was the city's finest. A man of code, a man of procedure. But when the system he swore to protect turned its back on the people he loved, the badge became a shackle. Now, he’s cutting it off.</p>
         </div>
+        <div class="content-image reveal">
+            <p style="font-style: italic; color: #bbb;">"I used to arrest men like you. Now, I just bury them." — Jay</p>
+        </div>
+    </section>
 
+    <section id="characters" class="content-section">
+        <div class="content-text reveal" style="text-align: center; width: 100%;">
+            <h2>Meet Ananya</h2>
+            <p style="max-width: 700px; margin: 0 auto;">Ananya isn't just Jay's wife; she is his moral compass. In the chaos of his war against the underworld, she is the only light worth coming home to.</p>
+            <br><br>
+            <p style="font-size: 1.25rem; font-style: italic; color: var(--text-white); border-top: 1px solid #333; padding-top: 30px;">
+                "I’d rather keep you in the dark, so that when I finally fall, I’ll find you there waiting." 
+                <br>
+                <span style="color: var(--primary-red); font-weight: bold; font-style: normal;">— JAY</span>
+            </p>
+        </div>
     </section>
 
     <section id="updates" class="mailbox-section">
-
         <div class="mailbox-container reveal">
-
             <h2 style="color: var(--accent-gold);">Secure Channel</h2>
-
             <p>Intel is power. Drop your email to receive updates on the hunt.</p>
-
             
-
             <form 
-
                 action="https://gmail.us13.list-manage.com/subscribe/post?u=9f3b8d4c5ae418fb6268e3e6a&amp;id=5eed88bcdc&amp;f_id=00ef45e1f0" 
-
                 method="post" 
-
                 id="mc-embedded-subscribe-form" 
-
                 name="mc-embedded-subscribe-form" 
-
                 class="mail-form" 
-
                 target="_blank">
-
                 
+                <input 
+                    type="email" 
+                    name="EMAIL" 
+                    class="mail-input" 
+                    id="mce-EMAIL" 
+                    placeholder="Enter Secure Email..." 
+                    required 
+                    maxlength="100">
+                
+                <div style="position: absolute; left: -5000px;" aria-hidden="true">
+                    <input type="text" name="b_9f3b8d4c5ae418fb6268e3e6a_5eed88bcdc" tabindex="-1" value="">
+                </div>
+
+                <button type="submit" name="subscribe" id="mc-embedded-subscribe" class="cta-btn">Join the Hunt</button>
+            </form>
+            <p id="form-feedback" style="margin-top: 15px; font-size: 0.8rem; display: none;"></p>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2026 JAY: THRILLER SERIES. ALL RIGHTS RESERVED.</p>
+    </footer>
+
+    <script>
+        // --- RATE LIMITING & VALIDATION LOGIC ---
+        const form = document.getElementById('mc-embedded-subscribe-form');
+        const feedback = document.getElementById('form-feedback');
+        let lastSubmitTime = 0;
+
+        form.addEventListener('submit', function(e) {
+            const now = Date.now();
+            const emailInput = document.getElementById('mce-EMAIL').value;
+
+            // 1. Rate Limiting (Prevents double-click or bot spam)
+            if (now - lastSubmitTime < 5000) { 
+                e.preventDefault();
+                feedback.style.display = 'block';
+                feedback.style.color = 'var(--primary-red)';
+                feedback.textContent = "Slow down. The channel is busy.";
+                return;
+            }
+
+            // 2. Basic Sanitization (Prevents script tags)
+            if (emailInput.includes('<') || emailInput.includes('>')) {
+                e.preventDefault();
+                alert("Invalid characters detected.");
+                return;
+            }
+
+            lastSubmitTime = now;
+        });
+
+        // --- REVEAL ANIMATION LOGIC ---
+        function reveal() {
+            var reveals = document.querySelectorAll('.reveal');
+            var windowHeight = window.innerHeight;
+            
+            reveals.forEach(el => {
+                var elementTop = el.getBoundingClientRect().top;
+                if (elementTop < windowHeight * 0.85) {
+                    el.classList.add('active');
+                }
+            });
+        }
+        window.addEventListener('scroll', reveal, { passive: true });
+        window.onload = reveal;
+    </script>
+</body>
+</html>
